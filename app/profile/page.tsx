@@ -1,0 +1,44 @@
+import FormContainer from "@/components/form/FormContainer";
+import { fetchProfile, updateProfileAction } from "@/utils/actions";
+import FormInput from "@/components/form/FormInput";
+import { SubmitButton } from "@/components/form/Buttons";
+
+const ProfilePage = async () => {
+  const profile = await fetchProfile();
+  return (
+    <>
+      <h2 className='mb-8'>User Profile</h2>
+      <div className='border p-8 rounded-md'>
+        {/* img input container */}
+
+        {/* form container */}
+
+        <FormContainer action={updateProfileAction}>
+          <div className=''>
+            <FormInput
+              type='text'
+              name='firstName'
+              label='First Name'
+              defaultValue={profile.firstName}
+            />
+            <FormInput
+              type='text'
+              name='lastName'
+              label='Last Name'
+              defaultValue={profile.lastName}
+            />
+            <FormInput
+              type='text'
+              name='username'
+              label='Username'
+              defaultValue={profile.username}
+            />
+          </div>
+
+          <SubmitButton text='Update Profile' className='mt-8' />
+        </FormContainer>
+      </div>
+    </>
+  );
+};
+export default ProfilePage;

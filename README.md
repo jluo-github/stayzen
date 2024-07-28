@@ -77,7 +77,7 @@ npm install prisma --save-dev
 npm install @prisma/client
 
 
-npx prisma init
+npx prisma inity
 
 npx prisma migrate dev --name init
 npx prisma studio
@@ -88,6 +88,20 @@ npx prisma studio
 
 [Useful Info](https://supabase.com/partners/integrations/prisma)
 [supabase setting](https://supabase.com/dashboard/project/qznnseygugjjcdbpnfho/settings/database)
+
+```
+npm install @supabase/supabase-js
+
+```
+
+### world-countries
+
+```
+npm i world-countries
+
+```
+
+### 
 
 ```
 

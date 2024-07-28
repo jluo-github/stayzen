@@ -30,3 +30,4 @@ const CreateProfilePage = async () => {
   );
 };
 export default CreateProfilePage;
+

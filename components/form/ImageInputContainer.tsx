@@ -18,8 +18,9 @@ type ImageInputContainerProps = {
 
 const ImageInputContainer = (props: ImageInputContainerProps) => {
   const { image, name, action, text } = props;
-  const [isUpdateFormVisible, setUpdateFormVisible] = useState(false);
+  const [isFormVisible, setFormVisible] = useState(false);
 
+  // show user icon if no image
   const userIcon = (
     <LuUser2 className='w-24 h-24 bg-primary text-white rounded-md mb-4' />
   );
@@ -33,7 +34,7 @@ const ImageInputContainer = (props: ImageInputContainerProps) => {
           width={100}
           height={100}
           alt={name}
-          className='w-24 h-24 rounded-md object-cover mb-4'
+          className='w-24 h-24 rounded-md object- mb-4'
         />
       ) : (
         userIcon
@@ -43,17 +44,21 @@ const ImageInputContainer = (props: ImageInputContainerProps) => {
       <Button
         variant='outline'
         size='sm'
-        onClick={() => setUpdateFormVisible((prev) => !prev)}>
+        onClick={() => setFormVisible((prev) => !prev)}>
         {text}
       </Button>
 
       {/* if update form visible */}
-      {isUpdateFormVisible && (
-        <div>
+      {isFormVisible && (
+        <div className='max-w-lg mt-4'>
           <FormContainer action={action}>
             {props.children}
             <ImageInput />
-            <SubmitButton size='sm' />
+            <SubmitButton
+              size='sm'
+              text='Upload Profile Image'
+              className='my-6'
+            />
           </FormContainer>
         </div>
       )}

@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 import {
   MdOutlineCabin,
-  MdOutlineHouse,
+  MdOutlineVilla,
   MdOutlineHolidayVillage,
 } from "react-icons/md";
 
@@ -14,11 +14,11 @@ export type Category = {
 };
 
 export type CategoryLabel =
-  | "house"
   | "apartment"
+  | "house"
   | "cabin"
   | "cottage"
-  | "tiny house"
+  | "townhouse"
   | "villa"
   | "tent"
   | "caravan"
@@ -26,12 +26,12 @@ export type CategoryLabel =
 
 export const categories: Category[] = [
   {
-    label: "house",
-    icon: BsHouseHeart,
-  },
-  {
     label: "apartment",
     icon: PiBuildingApartmentBold,
+  },
+  {
+    label: "house",
+    icon: BsHouseHeart,
   },
   {
     label: "cabin",
@@ -42,12 +42,12 @@ export const categories: Category[] = [
     icon: TbBuildingCottage,
   },
   {
-    label: "tiny house",
-    icon: MdOutlineHouse,
+    label: "townhouse",
+    icon: MdOutlineHolidayVillage,
   },
   {
     label: "villa",
-    icon: MdOutlineHolidayVillage,
+    icon: MdOutlineVilla,
   },
   {
     label: "tent",
@@ -57,7 +57,6 @@ export const categories: Category[] = [
     label: "caravan",
     icon: TbCaravan,
   },
-
   {
     label: "lodge",
     icon: MdOutlineCabin,

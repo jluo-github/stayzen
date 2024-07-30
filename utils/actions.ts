@@ -160,7 +160,7 @@ export const createPropertyAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
-console.log('formData: ', formData);
+  console.log("formData: ", formData);
   try {
     const rawData = Object.fromEntries(formData);
     const file = formData.get("image") as File;
@@ -178,8 +178,130 @@ console.log('formData: ', formData);
         profileId: user.id,
       },
     });
-  } catch (error:any) {
+  } catch (error: any) {
     return getError(error);
   }
   redirect("/");
+};
+
+// fetch properties:
+export const fetchPropertiesAction = async ({
+  search = "",
+  category,
+}: {
+  search?: string;
+  category?: string;
+}) => {
+  const properties = await db.property.findMany({
+    where: {
+      category,
+      OR: [
+        { name: { contains: search, mode: "insensitive" } },
+        { tagline: { contains: search, mode: "insensitive" } },
+      ],
+    },
+    select: {
+      id: true,
+      name: true,
+      tagline: true,
+      country: true,
+      image: true,
+      price: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return properties;
+};
+
+// fetch property details
+export const fetchPropertyDetailsAction = async (id: string) => {
+  // Fetch the property by id
+  return await db.property.findUnique({
+    where: { id },
+    include: { profile: true },
+  });
+};
+
+// fetch favorite
+export const fetchFavoriteIdAction = async ({
+  propertyId,
+}: {
+  propertyId: string;
+}) => {
+  // Get the current user
+  const user = await getAuthUser();
+
+  // Fetch the favorite by propertyId and user id
+  const favorite = await db.favorite.findFirst({
+    where: {
+      propertyId,
+      profileId: user.id,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  return favorite?.id || null;
+};
+
+// toggle favorite
+export const toggleFavoriteAction = async (prevState: {
+  propertyId: string;
+  favoriteId: string | null;
+  pathname: string;
+}) => {
+  // Get the current user
+  const user = await getAuthUser();
+  const { propertyId, favoriteId, pathname } = prevState;
+
+  // toggle the favorite in the database
+  try {
+    if (favoriteId) {
+      // Remove the favorite
+      await db.favorite.delete({
+        where: { id: favoriteId },
+      });
+    } else {
+      // Add the favorite
+      await db.favorite.create({
+        data: {
+          propertyId,
+          profileId: user.id,
+        },
+      });
+    }
+    revalidatePath(pathname);
+    return { message: favoriteId ? "Favorite removed" : "Favorite added" };
+  } catch (error) {
+    return getError(error);
+  }
+};
+
+// fetch favorites
+export const fetchFavoritesAction = async () => {
+  const user = await getAuthUser();
+
+  // Fetch the favorites by user id
+  const favorites = await db.favorite.findMany({
+    where: {
+      profileId: user.id,
+    },
+    // get connected property
+    select: {
+      property: {
+        select: {
+          id: true,
+          name: true,
+          tagline: true,
+          price: true,
+          country: true,
+          image: true,
+        },
+      },
+    },
+  });
+  return favorites.map((favorite) => favorite.property);
 };

@@ -20,16 +20,18 @@ model TestProfile {
 }
 
 model Profile {
-  id           String     @id @default(uuid())
-  clerkId      String     @unique
+  id           String   @id @default(uuid())
+  clerkId      String   @unique
   firstName    String
   lastName     String
   username     String
   email        String
   profileImage String
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  Property     Property[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  property  Property[]
+  favorites Favorite[]
 }
 
 model Property {
@@ -48,6 +50,21 @@ model Property {
   amenities   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  profile     Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
-  profileId   String
+
+  profile   Profile @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
+  profileId String
+
+  favorites Favorite[]
+}
+
+model Favorite {
+  id       String   @id @default(uuid())
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  profile   Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
+  profileId String
+
+  property   Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String
 }

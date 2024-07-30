@@ -215,7 +215,7 @@ export const fetchPropertiesAction = async ({
   return properties;
 };
 
-// fetch property details
+// fetch property details by id
 export const fetchPropertyDetailsAction = async (id: string) => {
   // Fetch the property by id
   return await db.property.findUnique({

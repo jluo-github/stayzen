@@ -30,3 +30,18 @@ export const amenities: Amenity[] = [
   { name: "washer", icon: MdOutlineLocalLaundryService, selected: false },
   { name: "wifi", icon: FiRadio, selected: false },
 ];
+
+export const amenityIcons: { [key: string]: React.ElementType } = {
+  "air conditioning": TbAirConditioning,
+  "bbq grill": MdOutlineOutdoorGrill,
+  "bed linens": IoBedOutline,
+  fireplace: GiCampfire,
+  heating: FiTrello,
+  kitchen: PiCookingPot,
+  microwave: LuMicrowave,
+  parking: IoCarSportOutline,
+  refrigerator: CgSmartHomeRefrigerator,
+  TV: FiFilm,
+  washer: MdOutlineLocalLaundryService,
+  wifi: FiRadio,
+};

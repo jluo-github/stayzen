@@ -12,6 +12,13 @@ import Description from "@/components/properties/Description";
 import { redirect } from "next/navigation";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import Amenities from "@/components/properties/Amenities";
+import { Skeleton } from "@/components/ui/skeleton";
+import dynamic from "next/dynamic";
+
+const DynamicMap = dynamic(
+  () => import("@/components/properties/PropertyMap"),
+  { ssr: false, loading: () => <Skeleton className='h-[400px] w-full' /> }
+);
 
 const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -35,7 +42,7 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
 
   const { firstName, profileImage } = profile;
 
-  console.log('amenities', amenities);
+  console.log("amenities", amenities);
 
   return (
     <>
@@ -62,23 +69,17 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
             <h1 className=''>{name}</h1>
             <PropertyRating inPage propertyId={id} />
           </div>
-
           {/* details */}
           <PropertyDetails details={details} />
-
           {/* user info */}
           <UserInfo profile={{ firstName, profileImage }} />
           <Separator className='mt-6' />
-
           {/* description */}
           <Description description={description} />
-
           {/* amenities */}
           <Amenities amenities={amenities} />
-
-          {/* countries */}
-
           {/* map */}
+          <DynamicMap countryCode={property.country} />;
         </div>
 
         {/* calendar */}

@@ -1,7 +1,7 @@
 import { findCountryByCode } from "@/utils/countries";
 
-const CountryFlagAndName = ({ country }: { country: string }) => {
-  const validCountry = findCountryByCode(country)!;
+const CountryFlagAndName = ({ countryCode }: { countryCode: string }) => {
+  const validCountry = findCountryByCode(countryCode)!;
 
   const countryName =
     validCountry.name.length > 20

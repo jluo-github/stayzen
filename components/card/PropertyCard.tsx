@@ -43,7 +43,7 @@ const PropertyCard = ({ property }: { property: PropertyCardProps }) => {
             <span className=''>{formatCurrency(price)}</span> / night
           </p>
           {/* country and flag */}
-          <CountryFlagAndName country={country} />
+          <CountryFlagAndName countryCode={country} />
         </div>
       </Link>
 

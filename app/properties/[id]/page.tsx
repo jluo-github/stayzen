@@ -42,8 +42,6 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
 
   const { firstName, profileImage } = profile;
 
-  console.log("amenities", amenities);
-
   return (
     <>
       <BreadCrumbs name={name} />
@@ -53,7 +51,6 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
         <div className=' flex items-center gap-x-4'>
           {/* share button */}
           <ShareButton propertyId={id} name={name} />
-
           {/* favorite button */}
           <FavoriteToggleButton propertyId={id} />
         </div>
@@ -62,7 +59,7 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
       {/* image */}
       <ImageContainer mainImage={image} name={name} />
 
-      <div className='md:grid sm:grid-cols-9  gap-x-12 mt-12'>
+      <div className='grid sm:grid-cols-9  gap-x-12 mt-12'>
         {/* name, rating */}
         <div className='sm:col-span-6 '>
           <div className='flex items-center gap-x-4'>

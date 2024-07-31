@@ -10,7 +10,7 @@ const Amenities = ({ amenities }: { amenities: string }) => {
   return (
     <div className='mt-4'>
       <h3 className='mb-4'>What this place offers</h3>
-      <div className=''>
+      <div className='grid grid-cols-2 '>
         {amenitiesList.map((amenity) => {
           if (!amenity.selected) return null;
           const Icon = amenityIcons[amenity.name];

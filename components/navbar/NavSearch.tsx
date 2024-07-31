@@ -2,7 +2,7 @@
 import { Input } from "../ui/input";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 
 const NavSearch = () => {
   const searchParams = useSearchParams();
@@ -20,8 +20,9 @@ const NavSearch = () => {
     } else {
       params.delete("search");
     }
-    // Update the URL with the new search parameters
-    replace(`${pathname}?${params.toString()}`);
+    //todo  Update the URL with the new search parameters
+    // replace(`${pathname}?${params.toString()}`);
+    replace(`/?${params.toString()}`);
   }, 500);
 
   useEffect(() => {

@@ -160,7 +160,7 @@ export const createPropertyAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
-  console.log("formData: ", formData);
+  // console.log("formData: ", formData);
   try {
     const rawData = Object.fromEntries(formData);
     const file = formData.get("image") as File;

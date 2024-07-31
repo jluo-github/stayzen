@@ -4,6 +4,7 @@ import { fetchFavoritesAction } from "@/utils/actions";
 
 const FavoritesPage = async () => {
   const favorites = await fetchFavoritesAction();
+  
   if (favorites.length === 0) {
     return <EmptyList />;
   }

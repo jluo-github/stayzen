@@ -1,4 +1,4 @@
-### Please visit [PurpleCat-Next-StayZen](http://localhost:3000) for details
+### Please visit [PurpleCat-StayZen](https://purplecat-stayzen.vercel.app) for details
 
 ### Shadcn/ui
 

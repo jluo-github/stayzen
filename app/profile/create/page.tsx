@@ -11,7 +11,7 @@ const CreateProfilePage = async () => {
   const user = await currentUser();
   if (user?.privateMetadata?.hasProfile) redirect("/profile");
 
-  console.log("currentUser", currentUser);
+  // console.log("currentUser", currentUser);
   return (
     <>
       <h2 className='mb-8'>New User</h2>

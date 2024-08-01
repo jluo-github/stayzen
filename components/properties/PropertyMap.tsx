@@ -27,7 +27,7 @@ const PropertyMap = ({ countryCode }: { countryCode: string }) => {
       <MapContainer
         scrollWheelZoom={false}
         zoomControl={false}
-        className='h-[50vh] rounded-lg relative z-0'
+        className='h-[250px] rounded-lg relative z-0'
         center={location || defaultLocation}
         zoom={7}>
         <TileLayer

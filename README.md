@@ -116,9 +116,20 @@ npm i react-share
 ```
 
 ### react-leaflet
+
 [React Leaflet](https://react-leaflet.js.org/)
+
 ```
 npm install react react-dom leaflet react-leaflet
 npm install -D @types/leaflet
+
+```
+
+### zustand
+
+[zustand docs](https://docs.pmnd.rs/zustand/getting-started/introduction)
+
+```
+npm install zustand
 
 ```

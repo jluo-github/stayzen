@@ -14,17 +14,34 @@ import { Separator } from "@radix-ui/react-dropdown-menu";
 import Amenities from "@/components/properties/Amenities";
 import { Skeleton } from "@/components/ui/skeleton";
 import dynamic from "next/dynamic";
+import SubmitReview from "@/components/reviews/SubmitReview";
+import PropertyReviews from "@/components/reviews/PropertyReviews";
+import { findReviewAction } from "@/utils/actions";
+import { auth } from "@clerk/nextjs/server";
 
 const DynamicMap = dynamic(
   () => import("@/components/properties/PropertyMap"),
-  { ssr: false, loading: () => <Skeleton className='h-[400px] w-full' /> }
+  { ssr: false, loading: () => <Skeleton className='h-[200px] w-full' /> }
+);
+
+const DynamicBookingWrapper = dynamic(
+  () => import("@/components/booking/BookingWrapper"),
+  { ssr: false, loading: () => <Skeleton className='h-[200px] w-full' /> }
 );
 
 const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
+  // get property id
   const { id } = params;
+  // get user id
+  const { userId } = auth();
+  // fetch property by id
   const property = await fetchPropertyDetailsAction(id);
-
   if (!property) redirect("/");
+
+  const isOwner = userId === property.profile.clerkId;
+  const reviewByUser = userId && (await findReviewAction(userId, id));
+
+  const allowReview = userId && !isOwner && !reviewByUser;
 
   const {
     name,
@@ -37,6 +54,8 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
     profile,
     description,
     amenities,
+    price,
+    bookings,
   } = property;
   const details = { baths, bedrooms, beds, guests };
 
@@ -81,9 +100,18 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
 
         {/* calendar */}
         <div className='flex flex-col items-center sm:col-span-3 '>
-          <BookingCalendar />
+          {/* <BookingCalendar /> */}
+          <DynamicBookingWrapper
+            propertyId={id}
+            price={price}
+            bookings={bookings}
+          />
         </div>
       </div>
+      {/* SubmitReview */}
+      {!reviewByUser && <SubmitReview propertyId={id} />}
+      {/* {allowReview && <SubmitReview propertyId={id} />} */}
+      <PropertyReviews propertyId={property.id} />
     </>
   );
 };

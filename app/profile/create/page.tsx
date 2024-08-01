@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 const CreateProfilePage = async () => {
   // Get the current user from clerk
   const user = await currentUser();
-  if (user?.privateMetadata?.hasProfile) redirect("/profile");
+  if (user?.privateMetadata?.hasProfile) redirect("/");
 
   // console.log("currentUser", currentUser);
   return (

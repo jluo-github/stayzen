@@ -64,9 +64,9 @@ export const TextAreaInputAuto = ({
   );
 };
 
-// auto expand textarea
+// auto expand textarea-no argument
 export const TextAreaAuto = () => {
-  const MAX_CHAR = 50;
+  const MAX_CHAR = 500;
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [content, setContent] = useState<string>("");
   const [remainingChar, setRemainingChar] = useState<number>(MAX_CHAR);

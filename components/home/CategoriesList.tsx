@@ -23,7 +23,9 @@ const CategoriesList = ({
                 href={`/?category=${cat.label}${searchTerm}`}>
                 <div
                   className={`${
-                    isActive ? "text-primary" : ""
+                    isActive
+                      ? "text-fuchsia-500 dark:text-fuchsia-500"
+                      : "text-primary dark:text-violet-400"
                   } flex flex-col items-center px-1 cursor-pointer duration-300 hover:text-primary `}>
                   <cat.icon className='w-8 h-8 lg:w-12 lg:h-12' />
                   <p className='capitalize mt-1 text-xs md:text-sm lg:text-lg'>

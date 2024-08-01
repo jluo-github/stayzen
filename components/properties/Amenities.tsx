@@ -17,7 +17,7 @@ const Amenities = ({ amenities }: { amenities: string }) => {
 
           return (
             <div key={amenity.name} className='flex items-center gap-x-4 mb-2'>
-              {Icon && <Icon className='h-6 w-6 text-primary' />}
+              {Icon && <Icon className='h-6 w-6 text-primary dark:text-violet-400' />}
               <span className='text-sm capitalize'>{amenity.name}</span>
             </div>
           );

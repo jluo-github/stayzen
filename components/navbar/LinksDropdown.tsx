@@ -28,7 +28,7 @@ const LinksDropdown = () => {
       {/*dropdown menu trigger */}
       <DropdownMenuTrigger asChild>
         <Button variant='link'>
-          <GiHamburgerMenu className='w-6 h-6 mr-4' />
+          <GiHamburgerMenu className='w-6 h-6 mr-4 text-violet-600 dark:text-violet-400' />
           <UserIcon />
         </Button>
       </DropdownMenuTrigger>

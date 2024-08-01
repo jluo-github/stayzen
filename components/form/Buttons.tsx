@@ -4,8 +4,10 @@ import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { SignInButton } from "@clerk/nextjs";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { LuTrash2, LuPenSquare } from "react-icons/lu";
 
 type btnSize = "default" | "sm" | "lg";
+type actionType = "edit" | "delete";
 
 type SubmitButtonProps = {
   className?: string;
@@ -69,6 +71,31 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
       ) : (
         <FaRegHeart />
       )}
+    </Button>
+  );
+};
+
+export const IconButton = ({ actionType }: { actionType: actionType }) => {
+  const { pending } = useFormStatus();
+
+  const renderIcon = () => {
+    switch (actionType) {
+      case "edit":
+        return <LuPenSquare className='text-primary z-5' />;
+      case "delete":
+        return <LuTrash2 className='text-primary z-5' />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <Button
+      type='submit'
+      size='icon'
+      variant='link'
+      className='p-2 cursor-pointer'>
+      {pending ? <ReloadIcon className=' animate-spin' /> : renderIcon()}
     </Button>
   );
 };

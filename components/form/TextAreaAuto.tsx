@@ -50,9 +50,9 @@ export const TextAreaInputAuto = ({
       <>
         <Textarea
           ref={textareaRef}
-          value={content}
           onInput={handleInput}
-          className='leading-loose overflow-hidden resize-none'
+          defaultValue={defaultValue}
+          className='leading-loose overflow-hidden resize-none dark:border-violet-800'
           id={name}
           name={name}
           rows={1}
@@ -104,7 +104,7 @@ export const TextAreaAuto = () => {
           rows={1}
           onInput={handleInput}
           placeholder='Textarea'
-          className='overflow-hidden resize-none border border-violet-500 rounded-md p-2 w-full'
+          className='overflow-hidden resize-none  dark:border-violet-800 rounded-md p-2 w-full'
         />
         <div className='text-right'>{remainingChar}</div>
       </>

@@ -13,6 +13,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { uploadImage } from "./supabase";
 import { calculateTotals } from "./calculateTotals";
+import { formatDate } from "@/utils/format";
 
 // error helper function
 const getError = (error: unknown): { message: string } => {
@@ -24,6 +25,7 @@ const getError = (error: unknown): { message: string } => {
 
 // get the current user from clerk
 export const getAuthUser = async () => {
+  // user from clerk
   const user = await currentUser();
   if (!user) {
     throw new Error("User not logged in");
@@ -482,3 +484,261 @@ export const createBookingAction = async (prevState: {
   redirect("/bookings");
 };
 
+// fetch bookings
+export const fetchBookingsAction = async () => {
+  const user = await getAuthUser();
+  const bookings = await db.booking.findMany({
+    where: {
+      profileId: user.id,
+    },
+    include: {
+      property: {
+        select: {
+          id: true,
+          name: true,
+          country: true,
+        },
+      },
+    },
+    orderBy: {
+      checkIn: "desc",
+    },
+  });
+  return bookings;
+};
+
+// delete booking
+export const deleteBookingAction = async (prevState: { bookingId: string }) => {
+  const { bookingId } = prevState;
+  const user = await getAuthUser();
+
+  try {
+    await db.booking.delete({
+      where: {
+        id: bookingId,
+        profileId: user.id,
+      },
+    });
+
+    revalidatePath("/bookings");
+    return { message: "Booking deleted" };
+  } catch (error) {
+    return getError(error);
+  }
+};
+
+// fetch rentals
+export const fetchRentalsAction = async () => {
+  const user = await getAuthUser();
+  const rentals = await db.property.findMany({
+    where: {
+      profileId: user.id,
+    },
+    select: {
+      id: true,
+      name: true,
+      price: true,
+    },
+  });
+
+  const rentalSum = await Promise.all(
+    rentals.map(async (rental) => {
+      const totalNightsSum = await db.booking.aggregate({
+        where: {
+          propertyId: rental.id,
+        },
+        _sum: {
+          totalNights: true,
+        },
+      });
+
+      const orderTotalSum = await db.booking.aggregate({
+        where: {
+          propertyId: rental.id,
+        },
+        _sum: {
+          orderTotal: true,
+        },
+      });
+
+      return {
+        ...rental,
+        totalNightsSum: totalNightsSum._sum.totalNights,
+        orderTotalSum: orderTotalSum._sum.orderTotal,
+      };
+    })
+  );
+  return rentalSum;
+};
+
+// delete rental
+export const deleteRentalAction = async (prevState: { propertyId: string }) => {
+  const { propertyId } = prevState;
+  const user = await getAuthUser();
+
+  try {
+    await db.property.delete({
+      where: {
+        id: propertyId,
+        profileId: user.id,
+      },
+    });
+
+    revalidatePath("/rentals");
+    return { message: "Rental deleted" };
+  } catch (error) {
+    return getError(error);
+  }
+};
+
+// fetch rental by propertyId and user id
+export const fetchRentalByIdAction = async (propertyId: string) => {
+  const user = await getAuthUser();
+
+  const rental = await db.property.findUnique({
+    where: {
+      id: propertyId,
+      profileId: user.id,
+    },
+  });
+
+  return rental;
+};
+
+// update rental
+export const updatePropertyAction = async (
+  prevState: any,
+  formData: FormData
+): Promise<{ message: string }> => {
+  const user = await getAuthUser();
+  const propertyId = formData.get("id") as string;
+
+  try {
+    const rawData = Object.fromEntries(formData);
+    const validatedData = validateWithZod(propertySchema, rawData);
+
+    await db.property.update({
+      where: {
+        id: propertyId,
+        profileId: user.id,
+      },
+      data: {
+        ...validatedData,
+      },
+    });
+
+    revalidatePath(`/rentals/${propertyId}/edit`);
+    return { message: "Rental updated" };
+  } catch (error) {
+    return getError(error);
+  }
+};
+
+// update rental image
+export const updatePropertyImageAction = async (
+  prevState: any,
+  formData: FormData
+): Promise<{ message: string }> => {
+  const user = await getAuthUser();
+  const propertyId = formData.get("id") as string;
+
+  try {
+    const image = formData.get("image") as File;
+    const validatedData = validateWithZod(imageSchema, { image });
+    // get the url of the image from supabase
+    const fullPath = await uploadImage(validatedData.image);
+
+    await db.property.update({
+      where: {
+        id: propertyId,
+        profileId: user.id,
+      },
+      data: {
+        image: fullPath,
+      },
+    });
+    revalidatePath(`/rentals/${propertyId}/edit`);
+    return { message: "Image updated" };
+  } catch (error) {
+    return getError(error);
+  }
+};
+
+// fetch reservations
+export const fetchReservationsAction = async () => {
+  const user = await getAuthUser();
+
+  const reservations = await db.booking.findMany({
+    where: {
+      property: {
+        profileId: user.id,
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      property: {
+        select: {
+          id: true,
+          name: true,
+          price: true,
+          country: true,
+        },
+      },
+    },
+  });
+  return reservations;
+};
+
+// fetch admin:
+const getAdminUser = async () => {
+  const user = await getAuthUser();
+  if (user.id !== process.env.ADMIN_USER_ID) redirect("/");
+  return user;
+};
+
+// fetch stats:
+export const fetchStatsAction = async () => {
+  await getAdminUser();
+
+  const usersCount = await db.profile.count();
+  const propertiesCount = await db.property.count();
+  const bookingsCount = await db.booking.count();
+
+  return { usersCount, propertiesCount, bookingsCount };
+};
+
+// fetch charts action
+export const fetchChartsAction = async () => {
+  await getAdminUser();
+
+  // get the date six months ago
+  const date = new Date();
+  const sixMonthsAgo = new Date(date.setMonth(date.getMonth() - 6));
+
+  const bookings = await db.booking.findMany({
+    where: {
+      createdAt: {
+        gte: sixMonthsAgo,
+      },
+    },
+    orderBy: {
+      createdAt: "asc",
+    },
+  });
+
+  const bookingsPerMonth = bookings.reduce((acc: Array<{ date: string; count: number }>, booking) => {
+    const date = formatDate(booking.createdAt, true);
+  
+    const existing = acc.find((item) => item.date === date);
+  
+    if (existing) {
+      existing.count += 1;
+    } else {
+      acc.push({ date, count: 1 });
+    }
+    return acc;
+  }, []);
+  return bookingsPerMonth;
+};

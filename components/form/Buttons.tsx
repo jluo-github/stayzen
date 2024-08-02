@@ -63,13 +63,13 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
       type='submit'
       size='icon'
       variant='outline'
-      className='p-2 cursor-pointer'>
+      className=' cursor-pointer text-xl '>
       {pending ? (
         <ReloadIcon className=' animate-spin' />
       ) : isFavorite ? (
-        <FaHeart />
+        <FaHeart className='text-fuchsia-500' />
       ) : (
-        <FaRegHeart />
+        <FaRegHeart className='text-violet-500' />
       )}
     </Button>
   );
@@ -81,9 +81,11 @@ export const IconButton = ({ actionType }: { actionType: actionType }) => {
   const renderIcon = () => {
     switch (actionType) {
       case "edit":
-        return <LuPenSquare className='text-primary z-5' />;
+        return (
+          <LuPenSquare className='text-primary z-5 dark:text-violet-400' />
+        );
       case "delete":
-        return <LuTrash2 className='text-primary z-5' />;
+        return <LuTrash2 className='z-5 text-fuchsia-500' />;
       default:
         return null;
     }

@@ -9,7 +9,7 @@ const Logo = () => {
     // <Button size='sm' asChild>
     <Link href='/' className='flex flex-col items-center justify-center'>
       <Image src={logo} width={55} height={55} alt='logo' />
-      <span className='text-violet-600 font-semibold dark:text-white'>
+      <span className='text-primary font-semibold dark:text-violet-200'>
         StayZen
       </span>
     </Link>

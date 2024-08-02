@@ -37,7 +37,7 @@ const CounterInput = ({
         {/* title */}
         <div className='flex items-center justify-between flex-wrap'>
           <div className='flex items-center gap-x-4'>
-            <h2 className='capitalize'>{detail}</h2>
+            <h3 className='capitalize'>{detail}</h3>
             <span className='text-muted-foreground'>
               Specify the number of {detail}
             </span>
@@ -51,8 +51,7 @@ const CounterInput = ({
             size='icon'
             type='button'
             onClick={decrement}>
-            {" "}
-            <LuMinus className='w-5 h-5 text-primary' />
+            <LuMinus className='w-5 h-5 text-primary dark:text-violet-300' />
           </Button>
 
           {/* count */}
@@ -64,8 +63,7 @@ const CounterInput = ({
             size='icon'
             type='button'
             onClick={increment}>
-            {" "}
-            <LuPlus className='w-5 h-5 text-primary' />
+            <LuPlus className='w-5 h-5 text-primary dark:text-violet-300' />
           </Button>
         </div>
       </CardHeader>

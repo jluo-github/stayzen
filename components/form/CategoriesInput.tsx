@@ -21,7 +21,7 @@ const CategoriesInput = ({ defaultValue }: { defaultValue?: string }) => {
         name={name}
         required>
         {/* triger */}
-        <SelectTrigger id={name}>
+        <SelectTrigger id={name} className='dark:border-violet-800'>
           <SelectValue />
         </SelectTrigger>
 

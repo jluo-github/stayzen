@@ -11,7 +11,6 @@ import {
   defaultSelected,
   generateBlockedPeriods,
 } from "@/utils/calendar";
-import { set } from "date-fns";
 
 const BookingCalendar = () => {
   const { toast } = useToast();
@@ -22,13 +21,14 @@ const BookingCalendar = () => {
   const blockedDates = generateBlockedPeriods({ bookings, today: currentDate });
   // grey out dates that are already booked
   const unavailableDates = generateDisabledDates(blockedDates);
+  // console.log('unavailableDates: ', unavailableDates);
 
   useEffect(() => {
     const selectedRange = generateDateRange(range);
 
     // check if selected dates are already booked
     const isUnavailableIncluded = selectedRange.some((date) => {
-      // return false if no date is booked
+      // set range to [] if date is already booked
       if (unavailableDates[date]) {
         setRange(defaultSelected);
         toast({
@@ -42,14 +42,17 @@ const BookingCalendar = () => {
   }, [range]);
 
   return (
-    <Calendar
-      mode='range'
-      defaultMonth={currentDate}
-      selected={range}
-      onSelect={setRange}
-      className='mb-4'
-      disabled={blockedDates}
-    />
+    <>
+      <p className='mb-4'>Choose Your Dates to Book</p>
+      <Calendar
+        mode='range'
+        defaultMonth={currentDate}
+        selected={range}
+        onSelect={setRange}
+        className='mb-4'
+        disabled={blockedDates}
+      />
+    </>
   );
 };
 

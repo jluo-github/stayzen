@@ -14,8 +14,9 @@ function PriceInput({ defaultValue }: FormInputNumberProps) {
       <Label htmlFor='price' className='capitalize'>
         Price ($)
       </Label>
-      
+
       <Input
+        className='dark:border-violet-800'
         id={name}
         type='number'
         name={name}

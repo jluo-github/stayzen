@@ -14,7 +14,7 @@ const ImageInput = () => {
         name={name}
         type='file'
         accept='image/*'
-        className='max-w-xs'
+        className='max-w-xs dark:border-violet-800'
         required
       />
     </div>

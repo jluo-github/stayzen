@@ -20,9 +20,8 @@ const CountriesInput = ({ defaultValue }: { defaultValue?: string }) => {
         defaultValue={defaultValue || formattedCountries[0].code}
         name={name}
         required>
-
-          {/*select trigger */}
-        <SelectTrigger id={name}>
+        {/*select trigger */}
+        <SelectTrigger id={name} className='dark:border-violet-800'>
           <SelectValue />
         </SelectTrigger>
 
@@ -31,7 +30,7 @@ const CountriesInput = ({ defaultValue }: { defaultValue?: string }) => {
           {formattedCountries.map((country) => (
             <SelectItem key={country.code} value={country.code}>
               <span className='flex items-center gap-4'>
-                {country.flag}  {country.name}
+                {country.flag} {country.name}
               </span>
             </SelectItem>
           ))}

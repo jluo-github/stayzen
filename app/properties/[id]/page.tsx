@@ -65,7 +65,7 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
     <>
       <BreadCrumbs name={name} />
 
-      <header className='flex items-center justify-between mt-4'>
+      <header className='flex items-center justify-between my-12'>
         <h1 className=''>{tagline}</h1>
         <div className=' flex items-center gap-x-4'>
           {/* share button */}
@@ -78,18 +78,18 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
       {/* image */}
       <ImageContainer mainImage={image} name={name} />
 
-      <div className='grid sm:grid-cols-9  gap-x-12 mt-12'>
+      <div className='grid sm:grid-cols-10  gap-x-8 lg:gap-x-12 my-12'>
         {/* name, rating */}
         <div className='sm:col-span-6 '>
-          <div className='flex items-center gap-x-4'>
-            <h1 className=''>{name}</h1>
+          <div className='flex items-center gap-x-4 '>
+            <h2 className=' sm:text-xl md:text-3xl lg:text-4xl'>{name}</h2>
             <PropertyRating inPage propertyId={id} />
           </div>
           {/* details */}
           <PropertyDetails details={details} />
           {/* user info */}
           <UserInfo profile={{ firstName, profileImage }} />
-          <Separator className='mt-6' />
+          <Separator className='mt-8' />
           {/* description */}
           <Description description={description} />
           {/* amenities */}
@@ -99,7 +99,7 @@ const PropertyDetailsPage = async ({ params }: { params: { id: string } }) => {
         </div>
 
         {/* calendar */}
-        <div className='flex flex-col items-center sm:col-span-3 '>
+        <div className='flex flex-col items-center sm:col-span-4 my-6'>
           {/* <BookingCalendar /> */}
           <DynamicBookingWrapper
             propertyId={id}

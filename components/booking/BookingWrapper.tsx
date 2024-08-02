@@ -27,7 +27,6 @@ const BookingWrapper = ({
 
   return (
     <>
-      {" "}
       <BookingCalendar />
       <BookingContainer />
     </>

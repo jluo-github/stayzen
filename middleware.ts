@@ -1,31 +1,37 @@
-// import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// const isProtectedRoute = createRouteMatcher([
-//   "/bookings(.*)",
-//   "/checkout(.*)",
-//   "/favorites(.*)",
-//   "/profile(.*)",
-//   "/rentals(.*)",
-//   "/reviews(.*)",
-// ]);
+import { NextResponse } from "next/server";
 
-// export default clerkMiddleware((auth, req) => {
-//   if (isProtectedRoute(req)) auth().protect();
-// });
+const isPublicRoute = createRouteMatcher(["/", "/properties(.*)", "/about"]);
 
-// export const config = {
-//   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
-// };
+const isProtectedRoute = createRouteMatcher([
+  "/bookings(.*)",
+  "/checkout(.*)",
+  "/favorites(.*)",
+  "/profile(.*)",
+  "/rentals(.*)",
+  "/reservation(.*)",
+  "/reviews(.*)",
+]);
 
-import { clerkMiddleware } from "@clerk/nextjs/server";
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
-export default clerkMiddleware();
+export default clerkMiddleware(async (auth, req) => {
+  // console.log(auth().userId);
+  const isAdmin = auth().userId === process.env.ADMIN_USER_ID;
+  const isUser = auth().userId;
+
+  // if adminRoute, not admin
+  if (isAdminRoute(req) && !isAdmin) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  // if isProtectedRoute and not logged in, ruturn to home
+  if (isProtectedRoute(req) && !isUser) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+});
 
 export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
-    "/(api|trpc)(.*)",
-  ],
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };

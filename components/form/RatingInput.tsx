@@ -21,7 +21,7 @@ const RatingInput = ({
     return value.toString();
   }).reverse();
 
-  console.log("numbers: ", numbers);
+  // console.log("numbers: ", numbers);
 
   return (
     <div className='mb-2 max-w-xs'>

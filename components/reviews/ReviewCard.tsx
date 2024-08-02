@@ -17,7 +17,7 @@ const ReviewCard = ({ reviewInfo, children }: ReviewCardProps) => {
   const { comment, rating, name, image } = reviewInfo;
 
   return (
-    <Card className='relative'>
+    <Card id='reviews' className='relative'>
       {/* header */}
       <CardHeader>
         <div className='flex items-center'>

@@ -1,7 +1,10 @@
 const AboutPage = () => {
   return (
     <div className='mt-20'>
-      <h1 className='mb-10 text-5xl'>Welcome to StayZen</h1>
+      <h1 className='mb-10 text-5xl'>
+        Stay Calm,{" "}
+        <span className='text-primary dark:text-violet-500'>StayZen</span>!
+      </h1>
       <h3 className='mb-4'> Discover your perfect retreat with StayZen</h3>{" "}
       <h4 className='mb-4'>
         Whether you&apos;re seeking a tranquil escape, a cozy getaway, or an
@@ -21,7 +24,9 @@ const AboutPage = () => {
         from home. With a focus on quality, safety, and exceptional customer
         service, StayZen aims to make every stay a zenful experience.
       </h4>
-      <h3 className='mb-4'>Explore. Relax. StayZen.</h3>
+      <h3 className='mb-4 text-primary dark:text-violet-500'>
+        Explore. Relax. StayZen!
+      </h3>
     </div>
   );
 };

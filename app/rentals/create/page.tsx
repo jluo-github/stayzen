@@ -23,13 +23,13 @@ const CreatePropertyPage = () => {
             <FormInput
               name='name'
               type='text'
-              label='Name'
+              label='Name (20 limit)'
               defaultValue='Cabin in Latvia'
             />
             <FormInput
               name='tagline'
               type='text '
-              label='Tagline '
+              label='Tagline (20 limit)'
               defaultValue='Stay Calm, StayZen!'
             />
             {/* price */}
@@ -41,7 +41,7 @@ const CreatePropertyPage = () => {
           {/* <TextareaInput name='description' labelText='Description' /> */}
 
           {/* auto expand text area */}
-          <TextAreaInputAuto name='description' labelText='Description ' />
+          <TextAreaInputAuto name='description' labelText='Description' />
 
           {/* countries input */}
           <div className='grid sm:grid-cols-2 gap-8'>
@@ -55,10 +55,10 @@ const CreatePropertyPage = () => {
           <CounterInput detail='baths' />
 
           {/* amenities  */}
-          <h3 className='my-6'>Amenities</h3>
+          <h3 className='mt-6 mb-2'>Amenities</h3>
           <AmenitiesInput />
           {/* button */}
-          <SubmitButton text='Create Property' className='my-6' />
+          <SubmitButton text='Create Property' className='mt-12' />
         </FormContainer>
       </div>
     </>

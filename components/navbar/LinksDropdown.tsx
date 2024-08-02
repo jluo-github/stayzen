@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 import UserIcon from "./UserIcon";
 import { links } from "@/utils/links";
 import SignOutLink from "./SignOutLink";
+import { auth } from "@clerk/nextjs/server";
 import {
   SignInButton,
   SignUpButton,
@@ -23,6 +24,9 @@ import {
 } from "@clerk/nextjs";
 
 const LinksDropdown = () => {
+  const { userId } = auth();
+  const isAdmin = userId === process.env.ADMIN_USER_ID;
+
   return (
     <DropdownMenu>
       {/*dropdown menu trigger */}
@@ -38,12 +42,25 @@ const LinksDropdown = () => {
         {/* signed out */}
         <SignedOut>
           <DropdownMenuItem>
+            {/* home */}
+            <button className='w-full text-left'>
+              <Link href='/'>Home</Link>
+            </button>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            {/* about */}
+            <button className='w-full text-left'>
+              <Link href='/about'>About</Link>
+            </button>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+
+          <DropdownMenuItem>
             {/* login button */}
             <SignInButton mode='modal'>
               <button className='w-full text-left'>Login</button>
             </SignInButton>
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
 
           {/* register button */}
           <DropdownMenuItem>
@@ -55,14 +72,17 @@ const LinksDropdown = () => {
 
         {/* signed in */}
         <SignedIn>
-          {/* links */}
-          {links.map((link) => (
-            <DropdownMenuItem key={link.href}>
-              <Link href={link.href} className='capitalize w-full'>
-                {link.label}
-              </Link>
-            </DropdownMenuItem>
-          ))}
+          {links.map((link) => {
+            if (link.label === "admin" && !isAdmin) return null;
+
+            return (
+              <DropdownMenuItem key={link.href}>
+                <Link href={link.href} className='capitalize w-full'>
+                  {link.label}
+                </Link>
+              </DropdownMenuItem>
+            );
+          })}
           <DropdownMenuSeparator />
 
           {/* sign out button */}

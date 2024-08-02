@@ -23,6 +23,7 @@ const FormInput = ({
       </Label>
 
       <Input
+        className='dark:border-violet-800'
         id={name}
         name={name}
         type={type}

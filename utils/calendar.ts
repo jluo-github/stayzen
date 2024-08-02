@@ -6,6 +6,7 @@ export const defaultSelected: DateRange = {
   to: undefined,
 };
 
+// Generate a list of blocked periods
 export const generateBlockedPeriods = ({
   bookings,
   today,
@@ -28,22 +29,24 @@ export const generateBlockedPeriods = ({
   return disabledDays;
 };
 
+// Generate a range of dates between two dates
 export const generateDateRange = (range: DateRange | undefined): string[] => {
   if (!range || !range.from || !range.to) return [];
 
-  let currentDate = new Date(range.from);
+  let startDate = new Date(range.from);
   const endDate = new Date(range.to);
   const dateRange: string[] = [];
 
-  while (currentDate <= endDate) {
-    const dateString = currentDate.toISOString().split("T")[0];
+  while (startDate <= endDate) {
+    const dateString = startDate.toISOString().split("T")[0];
     dateRange.push(dateString);
-    currentDate.setDate(currentDate.getDate() + 1);
+    startDate.setDate(startDate.getDate() + 1);
   }
 
   return dateRange;
 };
 
+// Generates a mapping of disabled dates
 export const generateDisabledDates = (
   disabledDays: DateRange[]
 ): { [key: string]: boolean } => {
@@ -56,23 +59,24 @@ export const generateDisabledDates = (
   disabledDays.forEach((range) => {
     if (!range.from || !range.to) return;
 
-    let currentDate = new Date(range.from);
+    let startDate = new Date(range.from);
     const endDate = new Date(range.to);
 
-    while (currentDate <= endDate) {
-      if (currentDate < today) {
-        currentDate.setDate(currentDate.getDate() + 1);
+    while (startDate <= endDate) {
+      if (startDate < today) {
+        startDate.setDate(startDate.getDate() + 1);
         continue;
       }
-      const dateString = currentDate.toISOString().split("T")[0];
+      const dateString = startDate.toISOString().split("T")[0];
       disabledDates[dateString] = true;
-      currentDate.setDate(currentDate.getDate() + 1);
+      startDate.setDate(startDate.getDate() + 1);
     }
   });
 
   return disabledDates;
 };
 
+// Calculate the number of days between two dates
 export function calculateDaysBetween({
   checkIn,
   checkOut,

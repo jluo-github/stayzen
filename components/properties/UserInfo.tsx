@@ -1,4 +1,4 @@
-import { Description } from "@radix-ui/react-toast";
+
 import Image from "next/image";
 
 type UserInfoProps = {
@@ -24,12 +24,8 @@ const UserInfo = ({ profile: { profileImage, firstName } }: UserInfoProps) => {
         <p>
           Hosted By <span className='font-bold'>{firstName}</span>
         </p>
-        <p className='text-muted-foreground'>
-          Superhost &middot; 2 years hosting
-        </p>
+        <p className='text-muted-foreground'></p>
       </div>
-
-
     </div>
   );
 };

@@ -72,6 +72,10 @@ const BookingsPage = async () => {
 
 const DeleteBooking = ({ bookingId }: { bookingId: string }) => {
   const deleteBooking = deleteBookingAction.bind(null, { bookingId });
-  return <FormContainer action={deleteBooking}><IconButton actionType="delete"/></FormContainer>
+  return (
+    <FormContainer action={deleteBooking}>
+      <IconButton actionType='delete' />
+    </FormContainer>
+  );
 };
 export default BookingsPage;

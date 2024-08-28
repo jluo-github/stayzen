@@ -20,8 +20,6 @@ const NavSearch = () => {
     } else {
       params.delete("search");
     }
-    //todo  Update the URL with the new search parameters
-    // replace(`${pathname}?${params.toString()}`);
     replace(`/?${params.toString()}`);
   }, 500);
 

@@ -3,13 +3,7 @@ import { Poppins, Montserrat, Ubuntu } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Providers from "./providers";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 
 // font families
 const poppins = Poppins({ weight: ["400", "500", "700"], subsets: ["latin"] });

@@ -3,7 +3,7 @@ import ReviewCard from "./ReviewCard";
 
 const PropertyReviews = async ({ propertyId }: { propertyId: string }) => {
   const reviews = await fetchPropertyReviewsAction(propertyId);
-  if (reviews.length < 1) return <div>No reviews yet</div>;
+  if (reviews.length < 1) return <div className='mt-12'>No reviews yet</div>;
 
   return (
     <div className='mt-8'>
@@ -28,4 +28,3 @@ const PropertyReviews = async ({ propertyId }: { propertyId: string }) => {
 };
 
 export default PropertyReviews;
-

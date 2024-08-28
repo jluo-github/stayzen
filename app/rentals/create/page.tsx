@@ -9,7 +9,6 @@ import ImageInput from "@/components/form/ImageInput";
 import CounterInput from "@/components/form/CounterInput";
 import { TextAreaInputAuto } from "@/components/form/TextAreaAuto";
 import AmenitiesInput from "@/components/form/AmenitiesInput";
-import TextareaInput from "@/components/form/TextAreaInput";
 
 const CreatePropertyPage = () => {
   return (
@@ -24,7 +23,7 @@ const CreatePropertyPage = () => {
               name='name'
               type='text'
               label='Name (20 limit)'
-              defaultValue='Cabin in Latvia'
+              defaultValue='Cabin in Japan'
             />
             <FormInput
               name='tagline'
@@ -38,9 +37,6 @@ const CreatePropertyPage = () => {
             <CategoriesInput />
           </div>
           {/* text area-description */}
-          {/* <TextareaInput name='description' labelText='Description' /> */}
-
-          {/* auto expand text area */}
           <TextAreaInputAuto name='description' labelText='Description' />
 
           {/* countries input */}

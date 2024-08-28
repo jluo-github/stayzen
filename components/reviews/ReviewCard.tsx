@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Rating from "./Rating";
 import Comment from "./Comment";
-import { IconButton } from "@/components/form/Buttons";
 
 type ReviewCardProps = {
   reviewInfo: {

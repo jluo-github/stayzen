@@ -20,7 +20,6 @@ import {
   SignUpButton,
   SignedIn,
   SignedOut,
-  UserButton,
 } from "@clerk/nextjs";
 
 const LinksDropdown = () => {

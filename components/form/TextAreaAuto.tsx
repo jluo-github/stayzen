@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -9,14 +9,7 @@ type TextAreaInputProps = {
   defaultValue?: string;
 };
 
-const tempDefaultDescription =
-  "Charming Downtown Loft with Modern Amenities. Experience the vibrant heart of the city in this stylish downtown loft, perfect for solo travelers or couples seeking an urban retreat. This Airbnb offers a blend of modern comfort and historic charm, featuring exposed brick walls, high ceilings, and large windows that flood the space with natural light. The open-concept living area includes a fully equipped kitchen, cozy dining nook, and a comfortable lounge space with a flat-screen TV. The bedroom, adorned with plush bedding and contemporary decor, promises restful nights. Located within walking distance to trendy cafes, boutique shops, and cultural attractions, this loft is your ideal home base for exploring the city's best offerings. Enjoy the convenience of high-speed Wi-Fi, air conditioning, and a washer/dryer unit, ensuring a hassle-free stay.";
-
-export const TextAreaInputAuto = ({
-  name,
-  labelText,
-  defaultValue,
-}: TextAreaInputProps) => {
+export const TextAreaInputAuto = ({ name, labelText, defaultValue }: TextAreaInputProps) => {
   const MAX_CHAR = 1000;
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [content, setContent] = useState<string>("");
@@ -43,11 +36,12 @@ export const TextAreaInputAuto = ({
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
   };
+
   return (
     <div className='mb-4'>
       <Label className='capitalize'>{labelText || name}</Label>
 
-      <>
+      <div>
         <Textarea
           ref={textareaRef}
           onInput={handleInput}
@@ -59,12 +53,12 @@ export const TextAreaInputAuto = ({
           required
         />
         <div className='text-right '>{remainingChar}</div>
-      </>
+      </div>
     </div>
   );
 };
 
-// auto expand textarea-no argument
+// auto expand textarea no argument
 export const TextAreaAuto = () => {
   const MAX_CHAR = 500;
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -96,10 +90,10 @@ export const TextAreaAuto = () => {
   return (
     <div className='flex flex-col my-4 w-full'>
       <label htmlFor='textarea'>Message</label>
-      <>
+      <div>
         <textarea
           ref={textareaRef}
-          value={content}
+          defaultValue='defaultValue'
           id='textarea'
           rows={1}
           onInput={handleInput}
@@ -107,7 +101,7 @@ export const TextAreaAuto = () => {
           className='overflow-hidden resize-none  dark:border-violet-800 rounded-md p-2 w-full'
         />
         <div className='text-right'>{remainingChar}</div>
-      </>
+      </div>
     </div>
   );
 };

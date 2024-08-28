@@ -1,6 +1,12 @@
 import { Card, CardHeader } from "@/components/ui/card";
 
-const StatsCard = ({ title, value }: { title: string; value: number }) => {
+const StatsCard = ({
+  title,
+  value,
+}: {
+  title: string;
+  value: number | string;
+}) => {
   return (
     <Card className='bg-muted'>
       <CardHeader className='flex flex-row items-center justify-between'>

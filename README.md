@@ -143,9 +143,29 @@ npm install recharts
 
 ```
 
-###
+### Stripe
+
+[Embedded Form](https://docs.stripe.com/checkout/embedded/quickstart)
 
 ```
+npm install --save @stripe/react-stripe-js @stripe/stripe-js stripe axios
+
+```
+
+
+
+
+
+```
+
+GRANT USAGE ON SCHEMA public2 TO anon, authenticated, service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public2 TO anon, authenticated, service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public2 TO anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public2 TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public2 GRANT ALL ON TABLES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public2 GRANT ALL ON ROUTINES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public2 GRANT ALL ON SEQUENCES TO anon, authenticated, service_role;
+
 
 
 ```

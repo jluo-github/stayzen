@@ -20,7 +20,7 @@ export const formatDate = (date: Date, monthOnly?: boolean) => {
     year: "numeric",
     month: "long",
   };
-  if (monthOnly) options.day = "numeric";
+  if (!monthOnly) options.day = "numeric";
 
   return new Intl.DateTimeFormat("en-US", options).format(date);
 };

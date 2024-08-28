@@ -1,4 +1,17 @@
-### Please visit [PurpleCat-StayZen](https://purplecat-stayzen.vercel.app) for details
+## Please visit [PurpleCat-StayZen](https://purplecat-stayzen.vercel.app) for details
+
+## Skills and Tools Used
+
+- **Next.js:** Used for server-side rendering and routing.
+- **React:** Used for building the frontend of the website.
+- **TypeScript:** Added for type safety and improving code quality.
+- **Shadcn-ui:** Implemented for designing and developing UI components.
+- **Prisma/Supabase:** Used for database operations and data modeling.
+- **Zod:** Used for schema validation and type-safe data parsing.
+- **Clerk:** Integrated for authentication and user management.
+- **Zustand:** Implemented for state management in the application.
+- **Stripe:** Used for handling payments and financial transactions.
+- **GitHub Actions:** Utilized for automating CI/CD workflows.
 
 ### Shadcn/ui
 
@@ -10,8 +23,6 @@
 npx shadcn-ui@latest init
 
 npx shadcn-ui@latest add button breadcrumb calendar card checkbox dropdown-menu input label popover scroll-area select separator table textarea skeleton
-
-
 
 ```
 
@@ -77,7 +88,7 @@ npm install prisma --save-dev
 npm install @prisma/client
 
 
-npx prisma inity
+npx prisma init
 
 npx prisma migrate dev --name init
 npx prisma studio
@@ -149,23 +160,5 @@ npm install recharts
 
 ```
 npm install --save @stripe/react-stripe-js @stripe/stripe-js stripe axios
-
-```
-
-
-
-
-
-```
-
-GRANT USAGE ON SCHEMA public2 TO anon, authenticated, service_role;
-GRANT ALL ON ALL TABLES IN SCHEMA public2 TO anon, authenticated, service_role;
-GRANT ALL ON ALL ROUTINES IN SCHEMA public2 TO anon, authenticated, service_role;
-GRANT ALL ON ALL SEQUENCES IN SCHEMA public2 TO anon, authenticated, service_role;
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public2 GRANT ALL ON TABLES TO anon, authenticated, service_role;
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public2 GRANT ALL ON ROUTINES TO anon, authenticated, service_role;
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public2 GRANT ALL ON SEQUENCES TO anon, authenticated, service_role;
-
-
 
 ```

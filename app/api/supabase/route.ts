@@ -13,3 +13,22 @@ export async function GET(req: NextRequest, res: NextResponse) {
     NextResponse.error();
   }
 }
+
+
+export async function POST(req: NextRequest, res: NextResponse) {
+  try {
+    const testProfile = await db.testProfile.update({
+      where:{
+        id: "4d9cb566-f845-4b9b-a131-7d22fb766220"
+      },
+      data: {
+        name: "Cute Cat",
+      },
+    });
+
+    return NextResponse.json({ message: "Supabase updated successfully", testProfile });
+  } catch (error) {
+    console.error("Error creating Supabase record:", error);
+    NextResponse.error();
+  }
+}

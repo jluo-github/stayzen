@@ -4,15 +4,15 @@ import { ZodSchema } from "zod";
 export const profileSchema = z.object({
   firstName: z
     .string()
-    .min(1, { message: "First name must contain at least 1 characters " })
+    .min(1, { message: "First name must contain at least 1 character " })
     .max(20, { message: "First name must be less than 20 characters" }),
   lastName: z
     .string()
-    .min(1, { message: "Last name must contain at least 1 characters " })
+    .min(1, { message: "Last name must contain at least 1 character " })
     .max(20, { message: "Last name must be less than 20 characters" }),
   username: z
     .string()
-    .min(1, { message: "Username name must contain at least 1 characters " })
+    .min(1, { message: "Username name must contain at least 1 character " })
     .max(20, { message: "Username name must be less than 20 characters" }),
 });
 

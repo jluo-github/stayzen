@@ -4,15 +4,15 @@ import { NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher(["/", "/properties(.*)", "/about", "/api/supabase(.*)"]);
 
-const isProtectedRoute = createRouteMatcher([
-  "/bookings(.*)",
-  "/checkout(.*)",
-  "/favorites(.*)",
-  "/profile(.*)",
-  "/rentals(.*)",
-  "/reservation(.*)",
-  "/reviews(.*)",
-]);
+// const isProtectedRoute = createRouteMatcher([
+//   "/bookings(.*)",
+//   "/checkout(.*)",
+//   "/favorites(.*)",
+//   "/profile(.*)",
+//   "/rentals(.*)",
+//   "/reservation(.*)",
+//   "/reviews(.*)",
+// ]);
 
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
@@ -27,7 +27,7 @@ export default clerkMiddleware(async (auth, req) => {
   }
 
   // if isProtectedRoute and not logged in, ruturn to home
-  if (isProtectedRoute(req) && !isUser) {
+  if (!isPublicRoute(req) && !isUser && !isAdmin) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 });

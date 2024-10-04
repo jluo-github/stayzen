@@ -89,6 +89,7 @@ npm install @prisma/client
 
 
 npx prisma init
+prisma generate
 
 npx prisma migrate dev --name init
 npx prisma studio
@@ -162,3 +163,5 @@ npm install recharts
 npm install --save @stripe/react-stripe-js @stripe/stripe-js stripe axios
 
 ```
+
+ 

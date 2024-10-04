@@ -9,9 +9,9 @@ import { redirect } from "next/navigation";
 const CreateProfilePage = async () => {
   // Get the current user from clerk
   const user = await currentUser();
-  if (user?.privateMetadata?.hasProfile) redirect("/");
+  if (user?.privateMetadata?.hasProfile) redirect("/reviews");
 
-  // console.log("currentUser", currentUser);
+  console.log("currentUser", currentUser);
   return (
     <>
       <h2 className='mb-8'>New User</h2>

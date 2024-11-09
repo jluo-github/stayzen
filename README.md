@@ -1,4 +1,4 @@
-## Please visit [PurpleCat-StayZen](https://purplecat-stayzen.vercel.app) for details
+## Please visit [StayZen](https://purplecat-stayzen.vercel.app) for details
 
 ## Skills and Tools Used
 

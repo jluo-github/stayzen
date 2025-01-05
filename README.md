@@ -1,4 +1,4 @@
-## Please visit [PurpleCat-StayZen](https://purplecat-stayzen.vercel.app) for details
+## Please visit [StayZen](https://purplecat-stayzen.vercel.app) for details
 
 ## Skills and Tools Used
 
@@ -164,6 +164,7 @@ npm install --save @stripe/react-stripe-js @stripe/stripe-js stripe axios
 
 ```
 
+ 
 ### jest
 
 ```
@@ -176,3 +177,4 @@ npm i jest-fixed-jsdom --save-dev
 npm i -D msw whatwg-fetch
 
 ```
+ 

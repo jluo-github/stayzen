@@ -164,4 +164,15 @@ npm install --save @stripe/react-stripe-js @stripe/stripe-js stripe axios
 
 ```
 
- 
+### jest
+
+```
+ npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @testing-library/user-event ts-jest @types/jest
+
+npm init jest@latest
+
+npm i jest-fixed-jsdom --save-dev
+
+npm i -D msw whatwg-fetch
+
+```

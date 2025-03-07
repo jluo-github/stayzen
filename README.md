@@ -11,6 +11,7 @@
 - **Clerk:** Integrated for authentication and user management.
 - **Zustand:** Implemented for state management in the application.
 - **Stripe:** Used for handling payments and financial transactions.
+- **Jest:** Utilized for unit testing.
 - **GitHub Actions:** Utilized for automating CI/CD workflows.
 
 ### Shadcn/ui
@@ -164,17 +165,13 @@ npm install --save @stripe/react-stripe-js @stripe/stripe-js stripe axios
 
 ```
 
- 
 ### jest
 
 ```
- npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @testing-library/user-event ts-jest @types/jest
+ npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @testing-library/user-event ts-jest @types/jest jest-fixed-jsdom
 
 npm init jest@latest
-
-npm i jest-fixed-jsdom --save-dev
 
 npm i -D msw whatwg-fetch
 
 ```
- 

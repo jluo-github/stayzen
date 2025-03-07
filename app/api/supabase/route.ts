@@ -1,7 +1,7 @@
 import db from "@/utils/db";
 import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET() {
   try {
     const property = await db.property.findFirst({
       where: { name: "Cottage in New York" },
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   }
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const name = `CuteCat-${Math.ceil(Math.random() * 999)}`;
   try {
     const testProfile = await db.testProfile.update({
@@ -29,6 +29,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
     return NextResponse.json({ message: "Supabase updated successfully", testProfile });
   } catch (error) {
     console.error("Error creating Supabase record:", error);
-    return NextResponse.json({ error: "Error updating Supabase record" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Error updating Supabase record" },
+      { status: 500 }
+    );
   }
 }
